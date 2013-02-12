@@ -1,0 +1,11 @@
+name: NewlandersCommandTimer
+main: net.daboross.bukkitdev.commandtimer.CommandTimer
+version: 1.1
+author: Dabo Ross
+prefix: NCT
+description: Newlanders Command Timer
+commands:
+   refreshtimer:
+     description: This manually runs the command timer
+     usage: /<command>
+     permission: commandtimer.refreshtimer
