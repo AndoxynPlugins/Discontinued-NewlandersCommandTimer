@@ -11,9 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author daboross
  */
 public class CommandTimer extends JavaPlugin {
-    
+
     private CommandTimer instance;
-    
+
     @Override
     public void onEnable() {
         instance = this;
@@ -22,12 +22,12 @@ public class CommandTimer extends JavaPlugin {
         Runnable task = new CommandTask(getLogger(), this);
         Bukkit.getScheduler().runTask(this, task);
     }
-    
+
     @Override
     public void onDisable() {
         Bukkit.getScheduler().cancelTasks(this);
     }
-    
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("refreshtimer")) {
@@ -37,7 +37,7 @@ public class CommandTimer extends JavaPlugin {
             }
             Controller.runRemoveEntities(getLogger(), false);
             OtherCommands.runOtherCommands(getLogger());
-            
+
             return true;
         }
         return false;
