@@ -22,7 +22,9 @@ public class OtherCommands {
         }
         Bukkit.savePlayers();
         for (World wd : Bukkit.getServer().getWorlds()) {
+            l.log(Level.INFO, "Saving {0}", wd.getName());
             wd.save();
+            l.log(Level.INFO, "Done Saving {0}", wd.getName());
         }
         l.log(Level.INFO, "Online Players:");
         Server server = Bukkit.getServer();

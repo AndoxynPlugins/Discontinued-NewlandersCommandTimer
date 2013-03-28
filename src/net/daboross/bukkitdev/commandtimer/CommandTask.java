@@ -10,25 +10,25 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CommandTask implements Runnable {
 
-    private Logger l;
+    private final Logger mainl;
     private JavaPlugin instance;
 
-    public CommandTask(Logger l, JavaPlugin instance) {
-        this.l = l;
+    public CommandTask(Logger lSet, JavaPlugin instance) {
+        mainl = lSet;
         this.instance = instance;
     }
 
     @Override
     public void run() {
         if (Bukkit.getServer().getOnlinePlayers().length > 0) {
-            Controller.runRemoveEntities(l, false);
-            OtherCommands.runOtherCommands(l);
+            Controller.runRemoveEntities(mainl, false);
+            OtherCommands.runOtherCommands(mainl);
             if (instance.isEnabled()) {
-                Bukkit.getScheduler().runTaskLater(instance, new CommandTask(l, instance), 6000);
+                Bukkit.getScheduler().runTaskLater(instance, new CommandTask(mainl, instance), 6000);
             }
         } else {
             if (instance.isEnabled()) {
-                Bukkit.getScheduler().runTaskLater(instance, new CommandTask(l, instance), 12000);
+                Bukkit.getScheduler().runTaskLater(instance, new CommandTask(mainl, instance), 12000);
             }
         }
     }
