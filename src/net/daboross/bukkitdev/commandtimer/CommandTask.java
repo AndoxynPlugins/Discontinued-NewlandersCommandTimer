@@ -1,6 +1,5 @@
 package net.daboross.bukkitdev.commandtimer;
 
-import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,25 +9,23 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CommandTask implements Runnable {
 
-    private final Logger mainl;
     private JavaPlugin instance;
 
-    public CommandTask(Logger lSet, JavaPlugin instance) {
-        mainl = lSet;
+    public CommandTask(JavaPlugin instance) {
         this.instance = instance;
     }
 
     @Override
     public void run() {
         if (Bukkit.getServer().getOnlinePlayers().length > 0) {
-            Controller.runRemoveEntities(mainl, false);
-            OtherCommands.runOtherCommands(mainl);
+            Controller.runRemoveEntities(instance.getLogger(), false);
+            OtherCommands.runOtherCommands(instance.getLogger());
             if (instance.isEnabled()) {
-                Bukkit.getScheduler().runTaskLater(instance, new CommandTask(mainl, instance), 6000);
+                Bukkit.getScheduler().runTaskLater(instance, this, 6000);
             }
         } else {
             if (instance.isEnabled()) {
-                Bukkit.getScheduler().runTaskLater(instance, new CommandTask(mainl, instance), 12000);
+                Bukkit.getScheduler().runTaskLater(instance, this, 12000);
             }
         }
     }

@@ -12,14 +12,11 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CommandTimer extends JavaPlugin {
 
-    private CommandTimer instance;
-
     @Override
     public void onEnable() {
-        instance = this;
         PlayerListener pl = new PlayerListener(this);
         Bukkit.getServer().getPluginManager().registerEvents(pl, this);
-        Runnable task = new CommandTask(getLogger(), this);
+        Runnable task = new CommandTask(this);
         Bukkit.getScheduler().runTask(this, task);
     }
 
