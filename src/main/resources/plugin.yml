@@ -1,6 +1,6 @@
 name: NewlandersCommandTimer
 main: net.daboross.bukkitdev.commandtimer.CommandTimer
-version: 1.2
+version: ${project.version}
 author: Dabo Ross
 prefix: NCT
 description: Newlanders Command Timer
