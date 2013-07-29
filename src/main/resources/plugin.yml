@@ -1,8 +1,7 @@
-name: NewlandersCommandTimer
+name: ${project.name}
 main: net.daboross.bukkitdev.commandtimer.CommandTimer
 version: ${project.version}
 author: Dabo Ross
-prefix: NCT
 description: Newlanders Command Timer
 commands:
    refreshtimer:
