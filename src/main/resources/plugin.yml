@@ -1,5 +1,5 @@
 name: ${project.name}
-main: net.daboross.bukkitdev.commandtimer.CommandTimer
+main: net.daboross.bukkitdev.commandtimer.CommandTimerPlugin
 version: ${project.version}
 author: Dabo Ross
 description: Newlanders Command Timer

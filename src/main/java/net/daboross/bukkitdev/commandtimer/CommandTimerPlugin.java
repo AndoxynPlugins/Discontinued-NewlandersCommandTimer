@@ -16,17 +16,20 @@
  */
 package net.daboross.bukkitdev.commandtimer;
 
+import java.io.IOException;
+import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.MetricsLite;
 
 /**
  *
  * @author daboross
  */
-public class CommandTimer extends JavaPlugin {
+public class CommandTimerPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
@@ -34,6 +37,15 @@ public class CommandTimer extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(pl, this);
         Runnable task = new CommandTask(this);
         Bukkit.getScheduler().runTask(this, task);
+        MetricsLite metrics = null;
+        try {
+            metrics = new MetricsLite(this);
+        } catch (IOException ex) {
+            getLogger().log(Level.WARNING, "Unable to create Metrics", ex);
+        }
+        if (metrics != null) {
+            metrics.start();
+        }
     }
 
     @Override
@@ -44,8 +56,8 @@ public class CommandTimer extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("refreshtimer")) {
-            if (args.length > 0) {
-                sender.sendMessage(ChatColor.DARK_RED + "There Are Too Many Words After " + ChatColor.RED + "/" + label);
+            if (args.length != 0) {
+                sender.sendMessage(ChatColor.DARK_RED + "Too many arguments");
                 return true;
             }
             Controller.runRemoveEntities(getLogger(), false);
